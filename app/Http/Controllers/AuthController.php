@@ -14,6 +14,7 @@ class AuthController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|string|unique:users,email',
+            'role' => 'required|integer',
             'password' => 'required|string'
         ]);
 
@@ -21,6 +22,7 @@ class AuthController extends Controller
             'first_name' => $fields['first_name'],
             'last_name' => $fields['last_name'],
             'email' => $fields['email'],
+            "role" => $fields["role"],
             'password' => bcrypt($fields['password'])
         ]);
 
@@ -30,6 +32,7 @@ class AuthController extends Controller
             'id' => $user->id,
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
+            "role" => $user->role,
             'email' => $user->email,
             'token' => $token
         ];
@@ -60,6 +63,7 @@ class AuthController extends Controller
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
+            "role" => $user->role,
             'token' => $token
         ];
 
