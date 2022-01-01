@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
+use App\Models\Price_range;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-
-class UserController extends Controller
+class PriceRangeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response(User::all(),201);
+        return response(Price_range::all(),201);
     }
 
     /**
@@ -27,13 +26,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'surname'=>'required',
-            'email'=>'required|unique',
-            'password'=>'required',
-            'role' => 'required|min:1|max:2'
+            'range'=>'required'
         ]);
-       return response(User::create($request->all()),201);
+       return response(Price_range::create($request->all()),201);
     }
 
     /**
@@ -44,7 +39,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return response(User::find($id),201);
+        return response(Price_range::find($id),201);
     }
 
     /**
@@ -56,9 +51,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $us = User::find($id);
-        $us->update($request->all());
-        return response($us,201);
+        $range = Price_range::find($id);
+        $range->update($request->all());
+        return response($range,201);
     }
 
     /**
@@ -69,17 +64,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        Price_range::destroy($id);
     }
 
-    /**
+     /**
      * SEARCH
      *
-     * @param  str  $us
+     * @param  str  $reg
      * @return \Illuminate\Http\Response
      */
-    public function search($us)
+    public function search($rang)
     {
-        return response(User::where('email','like','%'.$us.'%')->get(),201);
+        return response(Price_range::where('range','like','%'.$rang.'%')->get(),201);
     }
 }

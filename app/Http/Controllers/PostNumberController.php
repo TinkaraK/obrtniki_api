@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
+use App\Models\Post_number;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-
-class UserController extends Controller
+class PostNumberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response(User::all(),201);
+        return response(Post_number::all(),201);
     }
 
     /**
@@ -27,13 +26,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'surname'=>'required',
-            'email'=>'required|unique',
-            'password'=>'required',
-            'role' => 'required|min:1|max:2'
+            'city'=>'required',
+            'id'=>'required'
         ]);
-       return response(User::create($request->all()),201);
+       return response(Post_number::create($request->all()),201);
     }
 
     /**
@@ -44,7 +40,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return response(User::find($id),201);
+        return response(Post_number::find($id),201);
     }
 
     /**
@@ -56,9 +52,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $us = User::find($id);
-        $us->update($request->all());
-        return response($us,201);
+        $city = Post_number::find($id);
+        $city->update($request->all());
+        return response($city,201);
     }
 
     /**
@@ -69,17 +65,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        Post_number::destroy($id);
     }
 
     /**
      * SEARCH
      *
-     * @param  str  $us
+     * @param  str  $cit
      * @return \Illuminate\Http\Response
      */
-    public function search($us)
+    public function search($cit)
     {
-        return response(User::where('email','like','%'.$us.'%')->get(),201);
+        return response(Post_number::where('city','like','%'.$cit.'%')->get(),201);
     }
 }

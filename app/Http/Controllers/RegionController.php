@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-
-class UserController extends Controller
+class RegionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response(User::all(),201);
+        // json_encode()
+        return response(Region::all(),201);
     }
 
     /**
@@ -27,13 +27,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'surname'=>'required',
-            'email'=>'required|unique',
-            'password'=>'required',
-            'role' => 'required|min:1|max:2'
+            'region'=>'required'
         ]);
-       return response(User::create($request->all()),201);
+       return response(Region::create($request->all()),201);
     }
 
     /**
@@ -44,7 +40,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return response(User::find($id),201);
+        return response(Region::find($id),201);
     }
 
     /**
@@ -56,9 +52,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $us = User::find($id);
-        $us->update($request->all());
-        return response($us,201);
+        $region = Region::find($id);
+        $region->update($request->all());
+        return response($region,201);
     }
 
     /**
@@ -69,17 +65,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        Region::destroy($id);
     }
 
     /**
      * SEARCH
      *
-     * @param  str  $us
+     * @param  str  $reg
      * @return \Illuminate\Http\Response
      */
-    public function search($us)
+    public function search($reg)
     {
-        return response(User::where('email','like','%'.$us.'%')->get(),201);
+        return response(Region::where('region','like','%'.$reg.'%')->get(),201);
     }
 }

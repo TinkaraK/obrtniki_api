@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-
-class UserController extends Controller
+class RatingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response(User::all(),201);
+        return response(Rating::all(),201);
     }
 
     /**
@@ -27,13 +26,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'surname'=>'required',
-            'email'=>'required|unique',
-            'password'=>'required',
-            'role' => 'required|min:1|max:2'
+            'id_sender'=>'required',
+            'rating'=>'required',
+            'id_reciever'=>'required'
         ]);
-       return response(User::create($request->all()),201);
+       return response(Rating::create($request->all()),201);
     }
 
     /**
@@ -44,7 +41,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return response(User::find($id),201);
+        return response(Rating::find($id),201);
     }
 
     /**
@@ -56,9 +53,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $us = User::find($id);
-        $us->update($request->all());
-        return response($us,201);
+        $comp = Rating::find($id);
+        $comp->update($request->all());
+        return response($comp,201);
     }
 
     /**
@@ -69,17 +66,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-    }
-
-    /**
-     * SEARCH
-     *
-     * @param  str  $us
-     * @return \Illuminate\Http\Response
-     */
-    public function search($us)
-    {
-        return response(User::where('email','like','%'.$us.'%')->get(),201);
+        Rating::destroy($id);
     }
 }

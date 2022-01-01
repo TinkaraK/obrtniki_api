@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTradeTypesTable extends Migration
+class CreateTradeTypes extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class CreateTradeTypesTable extends Migration
     public function up()
     {
         Schema::create('trade_types', function (Blueprint $table) {
-            $table->id();
-            $table->string("name");
+            $table->increments('id');
+            $table->string('type');
             $table->timestamps();
         });
     }
