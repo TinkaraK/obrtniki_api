@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 use App\Models\Price_range;
+use App\Models\PriceRange;
 use Illuminate\Database\Seeder;
 
 class PriceRangeSeeder extends Seeder
@@ -19,9 +20,9 @@ class PriceRangeSeeder extends Seeder
     public function run()
     {
         foreach($this->ranges as $range) {
-            Price_range::query()->firstOrCreate([
+            PriceRange::query()->firstOrCreate([
                 "range" => $range
         ]);
-        } 
+        }
     }
 }

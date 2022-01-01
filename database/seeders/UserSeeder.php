@@ -34,10 +34,10 @@ class UserSeeder extends Seeder
             "password" => Hash::make("geslo12p3")
         ]);
 
-        $faker = Faker::create();
+        $faker = Faker::create('sl_SI');
         foreach(range(1,100) as $st){
             DB::table('users')->insert([
-                'first_name' => $faker ->name,
+                'first_name' => $faker ->firstName,
                 'last_name' => $faker ->lastName,
                 'role' => $faker ->numberBetween($min = 1, $max = 2),
                 'email' => $faker ->email,

@@ -17,6 +17,9 @@ class CraftsmanController extends Controller
     public function index()
     {
         $craftsmen = Craftsman::all();
+        foreach ($craftsmen as $craftsman) {
+            $craftsman["avg_rating"] = Rating::where("craftsman_id", "=", $craftsman->id)->pluck("rating")->avg();
+        }
         return response($craftsmen,200);
     }
 
@@ -46,13 +49,14 @@ class CraftsmanController extends Controller
             'company_name'=>'required',
             'address'=>'required',
             'post_number'=>'required',
+            'city'=>'required',
             'phone_number'=>'required',
             'tax_number'=>'required',
             'trade_type_id'=>'required',
             'region_id'=>'required',
             "service_description" => "required",
             "company_description" => "required",
-            'price_range'
+            "price_range_id" => "required",
         ]);
        return response(Craftsman::create($request->all()),201);
     }
@@ -75,10 +79,12 @@ class CraftsmanController extends Controller
             'tax_number'=>$craftman->tax_number,
             'trade_type'=>$craftman->tradeType->type,
             'region'=> $craftman->region->region,
+            "price_range" => $craftman->priceRange->range,
             "service_description" => $craftman->service_description,
             "company_description" => $craftman->company_description,
+            "avg_rating" => Rating::where("craftsman_id", "=", $craftman->id)->pluck("rating")->avg(),
         ];
-        return response($response,201);
+        return response($response,200);
     }
 
     /**

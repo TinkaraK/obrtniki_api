@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\PriceRange;
 use Faker\Factory as Faker;
 use App\Models\Craftsman;
 use App\Models\Trade_type;
@@ -21,14 +22,16 @@ class CraftsmanSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $faker = Faker::create('sl_SI');
+
         $users = DB::table('users')->select('*')->where('role',2)->get();
         $pst = DB::table('post_numbers')->get('id');
         foreach($users as $user){
             DB::table('craftsmen')->insert([
                 'company_name' => $faker -> company,
-                'address' => $faker ->address,
-                'post_number' => Post_number::all()->random()->id,
+                'address' => $faker ->streetAddress,
+                'post_number' => $faker->numerify("####"),
+                'city' => $faker->city,
                 'phone_number' => $faker ->phoneNumber,
                 'tax_number' => $faker -> numerify('########'),
                 'trade_type_id' => $faker ->numberBetween(1, Trade_type::count()),
@@ -36,7 +39,7 @@ class CraftsmanSeeder extends Seeder
                 'company_description' => $faker ->text,
                 "user_id" => $user->id,
                 'region_id' => $faker ->numberBetween(1, Region::count()),
-              //  'price_range_id' => $faker ->numberBetween(1, Price_range::count())
+                'price_range_id' => $faker->numberBetween(1, PriceRange::count())
             ]);
         }
     }

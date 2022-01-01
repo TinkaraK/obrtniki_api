@@ -16,11 +16,11 @@ class Craftsman extends Model
             'post_number',
             'phone_number',
             'tax_number',
-            'trade_type',
-            'service_describtion',
+            'trade_type_id',
+            'service_description',
             'company_description',
-            'region',
-            'price_range',
+            'region_id',
+            'price_range_id',
     ];
 
      public function region(){
@@ -30,7 +30,7 @@ class Craftsman extends Model
         return $this->belongsTo('App\Models\Post_number');
     }
     public function priceRange(){
-        return $this->belongsTo('App\Models\Price_range');
+        return $this->belongsTo('App\Models\PriceRange');
     }
     public function tradeType(){
         return $this->belongsTo('App\Models\TradeType');

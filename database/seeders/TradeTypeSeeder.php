@@ -12,14 +12,14 @@ class TradeTypeSeeder extends Seeder
      * @return void
      */
     protected $types = [
-        "arhitekti",
-        "električarji",
-        "gradbeniki",
+        "arhitekt",
+        "električar",
+        "gradbenik",
         "okna, vrata",
-        "pleskarji",
-        "vodovodarji",
-        "vrtnarji",
-        "mizarji",
+        "pleskar",
+        "vodovodar",
+        "vrtnar",
+        "mizar",
 		"varnost",
 		"ogrevanje/hlajenje"
     ];

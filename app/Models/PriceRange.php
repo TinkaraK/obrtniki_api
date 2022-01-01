@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Price_range extends Model
+class PriceRange extends Model
 {
     use HasFactory;
     protected $fillable = [
         "id",
         "range"
     ];
-    public function craftsmans(){
+    public function craftsmen(){
         return $this->hasMany('App\Models\Craftsman');
     }
 }

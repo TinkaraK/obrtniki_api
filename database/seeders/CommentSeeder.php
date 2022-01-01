@@ -17,7 +17,7 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $faker = Faker::create('sl_SI');
         $users = DB::table('users')->select('*')->where('role',1)->get();
         foreach(range(1,250) as $st){
             DB::table('comments')->insert([

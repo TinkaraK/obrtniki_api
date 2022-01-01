@@ -19,7 +19,8 @@ class CreateCraftsmen extends Migration
             //$table->integer('user_id')->unsigned();
             $table->string('company_name');
             $table->string('address');
-            $table->string('post_number');
+            $table->integer('post_number');
+            $table->string('city');
             //$table->unsignedBigInteger('post_number')->unsigned();
             $table->string('phone_number');
             $table->string('tax_number');
@@ -32,6 +33,7 @@ class CreateCraftsmen extends Migration
             $table->foreignId("region_id");
             //$table->foreignId("post_number")->references("id")->on("post_numbers");
             $table->foreignId("trade_type_id");
+            $table->foreignId("price_range_id");
             $table->timestamps();
 
             // $table->foreign('region')->references('id')->on('regions')->onUpdate('cascade')->onDelete('cascade');
