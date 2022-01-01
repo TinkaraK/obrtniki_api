@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CraftsmanController;
 use App\Http\Controllers\FilterController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostNumberController;
 use App\Http\Controllers\PriceRangeController;
 use App\Http\Controllers\RatingController;
@@ -64,4 +65,6 @@ Route::resource('comments', CommentController::class);
 Route::resource('ratings', RatingController::class);
 // FILTER
 Route::resource('filter', FilterController::class);
+
+Route::resource("images", ImageController::class);
 

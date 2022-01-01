@@ -46,6 +46,10 @@ class Craftsman extends Model
     public function ratings(){
         return $this->hasMany('App\Models\Rating');
     }
+
+    public function images(){
+        return $this->hasMany('App\Models\Image');
+    }
 }
 
 
