@@ -15,12 +15,14 @@ class Craftsman extends Model
             'address',
             'post_number',
             'phone_number',
+            "city",
             'tax_number',
             'trade_type_id',
             'service_description',
             'company_description',
             'region_id',
             'price_range_id',
+            'user_id',
     ];
 
      public function region(){

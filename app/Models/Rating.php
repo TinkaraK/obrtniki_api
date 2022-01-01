@@ -10,9 +10,9 @@ class Rating extends Model
     use HasFactory;
     protected $fillable = [
         "id",
-        'id_sender',
+        'user_id',
         'rating',
-        'id_reciever'
+        'craftsman_id'
     ];
 
 

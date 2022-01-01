@@ -45,7 +45,6 @@ class CraftsmanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id'=>'required|unique',
             'company_name'=>'required',
             'address'=>'required',
             'post_number'=>'required',
@@ -57,6 +56,7 @@ class CraftsmanController extends Controller
             "service_description" => "required",
             "company_description" => "required",
             "price_range_id" => "required",
+            "user_id" => "required",
         ]);
        return response(Craftsman::create($request->all()),201);
     }
@@ -75,11 +75,13 @@ class CraftsmanController extends Controller
             'company_name'=>$craftman->company_name,
             'address'=>$craftman->address,
             'post_number'=>$craftman->post_number,
+            'city'=>$craftman->city,
             'phone_number'=>$craftman->phone_number,
             'tax_number'=>$craftman->tax_number,
             'trade_type'=>$craftman->tradeType->type,
             'region'=> $craftman->region->region,
             "price_range" => $craftman->priceRange->range,
+            "user_id" => $craftman->user_id,
             "service_description" => $craftman->service_description,
             "company_description" => $craftman->company_description,
             "avg_rating" => Rating::where("craftsman_id", "=", $craftman->id)->pluck("rating")->avg(),
