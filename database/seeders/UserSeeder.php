@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Str;
 use Faker\Factory as Faker;
 use App\Models\User;
@@ -22,7 +23,7 @@ class UserSeeder extends Seeder
             'last_name' => "Koncan",
             'role' => 1,
             'email' => "tinkara.koncan@gmail.com",
-            "password" => "geslo123"
+            "password" => Hash::make("geslo123"),
         ]);
 
         User::query()->firstOrCreate([
@@ -30,7 +31,7 @@ class UserSeeder extends Seeder
             'last_name' => "Novak",
             'role' => 2,
             'email' => "janez@gmail.com",
-            "password" => "geslo12p3"
+            "password" => Hash::make("geslo12p3")
         ]);
 
         $faker = Faker::create();

@@ -14,7 +14,7 @@ class Region extends Model
     ];
 
 
-    public function craftsmans(){
+    public function craftsmen(){
         return $this->hasMany('App\Models\Craftsman');
     }
 }

@@ -14,7 +14,7 @@ class CreatePostNumbers extends Migration
     public function up()
     {
         Schema::create('post_numbers', function (Blueprint $table) {
-            $table->id('id');
+            $table->id();
             $table->string('city');
             $table->timestamps();
         });

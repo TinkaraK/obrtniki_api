@@ -21,9 +21,9 @@ class CommentSeeder extends Seeder
         $users = DB::table('users')->select('*')->where('role',1)->get();
         foreach(range(1,250) as $st){
             DB::table('comments')->insert([
-                'id_sender' => $users->random()->id,
+                'user_id' => $users->random()->id,
                 'comment' => $faker -> text(64),
-                'id_reciever' => Craftsman::all()->random()->id,
+                'craftsman_id' => Craftsman::all()->random()->id,
             ]);
         }
     }

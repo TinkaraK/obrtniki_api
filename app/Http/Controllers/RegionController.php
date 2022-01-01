@@ -14,8 +14,8 @@ class RegionController extends Controller
      */
     public function index()
     {
-        // json_encode()
-        return response(Region::all(),201);
+        $regions = Region::all();
+        return response($regions,201);
     }
 
     /**
@@ -76,6 +76,7 @@ class RegionController extends Controller
      */
     public function search($reg)
     {
-        return response(Region::where('region','like','%'.$reg.'%')->get(),201);
+        $region = Region::where('region','like','%'.$reg.'%')->get();
+        return response($region,201);
     }
 }

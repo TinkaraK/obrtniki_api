@@ -1,7 +1,15 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CraftsmanController;
+use App\Http\Controllers\FilterController;
+use App\Http\Controllers\PostNumberController;
+use App\Http\Controllers\PriceRangeController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\TradeTypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +35,33 @@ Route::group(["middleware" => ['auth:sanctum']], function() {
 
 });
 
+Route::resource('regions', RegionController::class);
+Route::get('/regions/search/{region}', [RegionController::class,'search']);
+//___________PRICE__RANGE_______________________________________
+Route::resource('price_ranges', PriceRangeController::class);
+Route::get('/price_ranges/search/{range}', [PriceRangeController::class,'search']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//____________POST_NUMBER________________________________________________
+Route::resource('post_numbers', PostNumberController::class);
+Route::get('/post_numbers/search/{city}', [PostNumberController::class,'search']);
+
+//____________TRADE_TYPE_________________________________________________________
+Route::resource('trade-types', TradeTypeController::class);
+Route::get('/trade-types/search/{type}', [TradeTypeController::class,'search']);
+//____________USER_________________________________________________________
+Route::resource('users', UserController::class);
+Route::get('/users/search/{user}', [UserController::class,'search']);
+
+//____________craftsman_________________________________________________________
+Route::resource('craftsmen', CraftsmanController::class);
+Route::get('craftsmen/ratings/{id}', [CraftsmanController::class, "ratings"]);
+Route::get('craftsmen/comments/{id}', [CraftsmanController::class, "comments"]);
+Route::resource('craftsmen', CraftsmanController::class);
+Route::get('/craftsmen/search/{user}', [CraftsmanController::class,'search']);
+//____________COMMENTS_________________________________________________________
+Route::resource('comments', CommentController::class);
+//____________RATINGS_________________________________________________________
+Route::resource('ratings', RatingController::class);
+// FILTER
+Route::resource('filter', FilterController::class);
+

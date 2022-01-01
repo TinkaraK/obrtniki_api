@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Craftsman extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
             'id',
             'company_name',
@@ -23,19 +23,19 @@ class Craftsman extends Model
             'price_range',
     ];
 
-     public function regions(){
+     public function region(){
          return $this->belongsTo('App\Models\Region');
      }
-     public function post_numbers(){
+     public function postNumber(){
         return $this->belongsTo('App\Models\Post_number');
     }
-    public function price_ranges(){
+    public function priceRange(){
         return $this->belongsTo('App\Models\Price_range');
     }
-    public function trade_types(){
-        return $this->belongsTo('App\Models\Trade_type');
+    public function tradeType(){
+        return $this->belongsTo('App\Models\TradeType');
     }
-    public function users(){
+    public function user(){
         return $this->belongsTo('App\Models\User');
     }
     public function comments(){

@@ -24,19 +24,19 @@ class CraftsmanSeeder extends Seeder
         $faker = Faker::create();
         $users = DB::table('users')->select('*')->where('role',2)->get();
         $pst = DB::table('post_numbers')->get('id');
-        foreach($users as $us){
+        foreach($users as $user){
             DB::table('craftsmen')->insert([
-                'id' => $us->id,
                 'company_name' => $faker -> company,
                 'address' => $faker ->address,
                 'post_number' => Post_number::all()->random()->id,
                 'phone_number' => $faker ->phoneNumber,
                 'tax_number' => $faker -> numerify('########'),
-                'trade_type' => $faker ->numberBetween(1, Trade_type::count()),
-                'service_describtion' => $faker ->text,
+                'trade_type_id' => $faker ->numberBetween(1, Trade_type::count()),
+                'service_description' => $faker ->text,
                 'company_description' => $faker ->text,
-                'region' => $faker ->numberBetween(1, Region::count()),
-                'price_range' => $faker ->numberBetween(1, Price_range::count())
+                "user_id" => $user->id,
+                'region_id' => $faker ->numberBetween(1, Region::count()),
+              //  'price_range_id' => $faker ->numberBetween(1, Price_range::count())
             ]);
         }
     }

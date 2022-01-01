@@ -14,7 +14,7 @@ class RatingController extends Controller
      */
     public function index()
     {
-        return response(Rating::all(),201);
+        return response(Rating::all(),200);
     }
 
     /**
@@ -26,9 +26,9 @@ class RatingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_sender'=>'required',
+            'user_id'=>'required',
             'rating'=>'required',
-            'id_reciever'=>'required'
+            'craftsman_id'=>'required'
         ]);
        return response(Rating::create($request->all()),201);
     }

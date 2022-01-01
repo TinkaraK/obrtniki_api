@@ -12,23 +12,20 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       return response(Comment::all(),201);
+
+        $comments = Comment::all();
+        return response($comments,200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
         $request->validate([
-            'id_sender'=>'required',
+            'user_id'=>'required',
             'comment'=>'required',
-            'id_reciever'=>'required'
+            'craftsman_id'=>'required'
         ]);
        return response(Comment::create($request->all()),201);
     }
@@ -41,7 +38,7 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        return response(Comment::find($id),201);
+        return response(Comment::find($id),200);
     }
 
     /**

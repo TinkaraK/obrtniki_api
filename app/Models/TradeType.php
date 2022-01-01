@@ -17,7 +17,7 @@ class TradeType extends Model
         "name"
     ];
 
-    /*public function tradeType() {
-        return $this->belongsTo(TradeType::class);
-    }*/
+    public function craftsmen(){
+        return $this->hasMany('App\Models\Craftsman');
+    }
 }

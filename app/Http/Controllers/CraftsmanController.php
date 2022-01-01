@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Comment;
 use App\Models\Craftsman;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -14,8 +16,22 @@ class CraftsmanController extends Controller
      */
     public function index()
     {
-        return response(Craftsman::all(),201);
+        $craftsmen = Craftsman::all();
+        return response($craftsmen,200);
     }
+
+    public function ratings($id)
+    {
+        $ratings = Rating::where("craftsman_id", "=", $id)->get();
+        return response($ratings,200);
+    }
+
+    public function comments($id)
+    {
+        $comments = Comment::where("craftsman_id", "=", $id)->get();
+        return response($comments,200);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -32,8 +48,10 @@ class CraftsmanController extends Controller
             'post_number'=>'required',
             'phone_number'=>'required',
             'tax_number'=>'required',
-            'trade_type'=>'required',
-            'region'=>'required',
+            'trade_type_id'=>'required',
+            'region_id'=>'required',
+            "service_description" => "required",
+            "company_description" => "required",
             'price_range'
         ]);
        return response(Craftsman::create($request->all()),201);
@@ -47,7 +65,20 @@ class CraftsmanController extends Controller
      */
     public function show($id)
     {
-        return response(Craftsman::find($id),201);
+        $craftman = Craftsman::find($id);
+        $response = [
+            'id'=> $craftman->id,
+            'company_name'=>$craftman->company_name,
+            'address'=>$craftman->address,
+            'post_number'=>$craftman->post_number,
+            'phone_number'=>$craftman->phone_number,
+            'tax_number'=>$craftman->tax_number,
+            'trade_type'=>$craftman->tradeType->type,
+            'region'=> $craftman->region->region,
+            "service_description" => $craftman->service_description,
+            "company_description" => $craftman->company_description,
+        ];
+        return response($response,201);
     }
 
     /**

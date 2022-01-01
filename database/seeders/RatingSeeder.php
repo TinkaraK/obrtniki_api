@@ -19,12 +19,12 @@ class RatingSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $users = DB::table('users')->select('*')->where('role',1)->get();
+        $users = DB::table('users')->select('*')->where('role',"=", 1)->get();
         foreach(range(1,250) as $st){
             DB::table('ratings')->insert([
-                'id_sender' => $users->random()->id,
+                'user_id' => $users->random()->id,
                 'rating' => $faker -> numberBetween(1, 5),
-                'id_reciever' => Craftsman::all()->random()->id
+                'craftsman_id' => Craftsman::all()->random()->id
             ]);
         }
     }

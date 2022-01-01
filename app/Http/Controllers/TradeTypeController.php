@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Craftsman;
 use App\Models\Trade_type;
+use App\Models\TradeType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -14,8 +16,26 @@ class TradeTypeController extends Controller
      */
     public function index()
     {
-        return response(Trade_type::all(),201);
+        return response(TradeType::all(),200);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $type = TradeType::find($id)->type;
+        $craftsmen = Craftsman::all()->where("trade_type_id", "=", $id);
+        $craftsmen["trade_type"] = $type;
+        return response($craftsmen,200);
+    }
+
+
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -31,16 +51,7 @@ class TradeTypeController extends Controller
        return response(Trade_type::create($request->all()),201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return response(Trade_type::find($id),201);
-    }
+
 
     /**
      * Update the specified resource in storage.
