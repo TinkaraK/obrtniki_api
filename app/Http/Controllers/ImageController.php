@@ -26,13 +26,10 @@ class ImageController extends Controller
         if ($files = $request->file('file')) {
 
             //store file into document folder
-            $file = $request->file->store('public/documents');
+            $path ='public/documents'."/" . $request->craftsman_id;
+            $files = Storage::files($path);
+            $file = $request->file->storeAs($path, count($files) .".jpg");
 
-            //store your file into database
-            $image = new Image();
-            $image->title = $file;
-            $image->craftsman_id = $request->craftsman_id;
-            $image->save();
 
             return response()->json([
                 "success" => true,
@@ -47,7 +44,7 @@ class ImageController extends Controller
         $images = Image::where("craftsman_id", "=", $craftsman_id)->get();
         $response = [];
         foreach ($images as $image) {
-            $response[$image->id] = Image::make(Storage::disk("local")->get($image->title));
+            $response[$image->id] = url('storage/documents/' . $image->id);
         }
         return response($response, 200);
     }
