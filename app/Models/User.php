@@ -44,8 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function craftsmans(){
-        return $this->hasMany('App\Models\Craftsman');
+    public function craftsman(){
+        return $this->hasOne('App\Models\Craftsman');
     }
     public function comments(){
         return $this->hasMany('App\Models\Comment');
