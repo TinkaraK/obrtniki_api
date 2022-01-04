@@ -64,7 +64,8 @@ class AuthController extends Controller
             'last_name' => $user->last_name,
             'email' => $user->email,
             "role" => $user->role,
-            'token' => $token
+            'token' => $token,
+            "craftsman_id" => $user->craftsman->id ?? -1
         ];
 
         return response($response, 201);
