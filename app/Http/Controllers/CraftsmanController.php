@@ -85,6 +85,7 @@ class CraftsmanController extends Controller
             "service_description" => $craftman->service_description,
             "company_description" => $craftman->company_description,
             "avg_rating" => Rating::where("craftsman_id", "=", $craftman->id)->pluck("rating")->avg(),
+            "email" => $craftman->user->email
         ];
         return response($response,200);
     }
