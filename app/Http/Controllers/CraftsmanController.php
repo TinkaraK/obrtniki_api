@@ -32,6 +32,9 @@ class CraftsmanController extends Controller
     public function comments($id)
     {
         $comments = Comment::where("craftsman_id", "=", $id)->get();
+        foreach($comments as $comment) {
+            $comment["user_name"] = $comment->user->first_name;
+        }
         return response($comments,200);
     }
 

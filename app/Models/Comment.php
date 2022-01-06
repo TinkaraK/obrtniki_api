@@ -16,10 +16,10 @@ class Comment extends Model
     ];
 
 
-    public function senders(){
+    public function user(){
         return $this->belongsTo('App\Models\User');
     }
-    public function recievers(){
+    public function craftsman(){
         return $this->belongsTo('App\Models\Craftsman');
     }
 }
